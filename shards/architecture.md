@@ -50,7 +50,7 @@ Dispatcher discovers available agents dynamically via `list_agents`. It does not
 
 ## Workspace & Storage
 
-- **Ephemeral by default**: Every agent container has its own filesystem. It is **ephemeral** — destroyed when the container restarts. NEVER assume files written here survive.
+- **Ephemeral by default**: Agent containers have ephemeral filesystem. NEVER assume files written locally survive a restart.
 - **Persistent storage is a managed resource**: LLM agents cannot create or mount persistent storage themselves. They must request it through a deterministic agent or the control plane.
 - **Deterministic agents manage infrastructure**: Creating persistent directories, mounting them into containers, managing access — these are deterministic operations. LLM agents request resources; deterministic agents provision them.
 - **LLM agents use what they're given**: If a persistent directory is mounted into your container, you can read and write to it. But you don't decide what's mounted — that's decided by whoever created you.
