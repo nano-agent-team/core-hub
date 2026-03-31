@@ -1,0 +1,63 @@
+{
+  "id": "consciousness",
+  "name": "Consciousness",
+  "description": "Strategic brain — processes stimuli, generates system-level ideas, drives the what-next loop",
+  "model": "claude-sonnet-4-6",
+  "session_type": "persistent",
+  "version": "2.0.0",
+  "subscribe_topics": [
+    "agent.consciousness.inbox",
+    "agent.consciousness.task",
+    "soul.consciousness.inbox",
+    "soul.consciousness.evaluate",
+    "soul.idea.rejected",
+    "soul.idea.boundary",
+    "soul.idea.approved",
+    "soul.reflect.batch_ready"
+  ],
+  "outputs": [
+    {
+      "port": "new_idea",
+      "subject": "soul.idea.pending"
+    },
+    {
+      "port": "ask_user",
+      "subject": "soul.ask_user"
+    },
+    {
+      "port": "self_evaluate",
+      "subject": "soul.consciousness.evaluate"
+    },
+    {
+      "port": "counter_argue",
+      "subject": "soul.conscience.dialogue"
+    },
+    {
+      "port": "noop",
+      "subject": "soul.consciousness.noop"
+    },
+    {
+      "port": "distill_complete",
+      "subject": "soul.distill.done"
+    }
+  ],
+  "mcp_permissions": {
+    "tickets": [],
+    "soul": [
+      "create_goal",
+      "create_idea",
+      "journal_log",
+      "evaluate_self",
+      "continue_dialogue",
+      "ask_user",
+      "publish_signal",
+      "journal_reflect"
+    ]
+  },
+  "allowedTools": ["file_read", "file_write"],
+  "obsidian_mount": true,
+  "icon": "🧠",
+  "shards": [
+    "architecture"
+  ]
+}

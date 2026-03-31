@@ -1,0 +1,52 @@
+{
+  "id": "dispatcher",
+  "name": "Dispatcher",
+  "version": "0.2.0",
+  "description": "Decomposes plans into tasks, discovers available agents, dispatches dynamically, tracks completion",
+  "model": "claude-sonnet-4-6",
+  "session_type": "persistent",
+  "subscribe_topics": [
+    "agent.dispatcher.inbox",
+    "agent.dispatcher.task",
+    "soul.plan.ready",
+    "pipeline.task.done",
+    "pipeline.task.rejected"
+  ],
+  "outputs": [
+    {
+      "port": "escalate",
+      "subject": "soul.strategist.inbox"
+    },
+    {
+      "port": "plan_done",
+      "subject": "soul.plan.done"
+    },
+    {
+      "port": "ask_user",
+      "subject": "soul.ask_user"
+    },
+    {
+      "port": "noop",
+      "subject": "pipeline.task.noop"
+    }
+  ],
+  "mcp_permissions": {
+    "tickets": [],
+    "config": [],
+    "management": [],
+    "soul": [
+      "journal_log",
+      "ask_user",
+      "publish_signal",
+      "dispatch_task",
+      "list_agents",
+      "journal_reflect"
+    ]
+  },
+  "allowedTools": ["file_read", "file_write"],
+  "obsidian_mount": true,
+  "icon": "📡",
+  "shards": [
+    "architecture"
+  ]
+}

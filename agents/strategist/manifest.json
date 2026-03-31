@@ -1,0 +1,46 @@
+{
+  "id": "strategist",
+  "name": "Strategist",
+  "version": "0.2.0",
+  "description": "Tactical planner — decomposes approved ideas into actionable briefs",
+  "model": "claude-sonnet-4-6",
+  "session_type": "persistent",
+  "subscribe_topics": [
+    "agent.strategist.inbox",
+    "agent.strategist.task",
+    "soul.idea.approved",
+    "soul.plan.done",
+    "soul.strategist.inbox"
+  ],
+  "outputs": [
+    {
+      "port": "plan_ready",
+      "subject": "soul.plan.ready"
+    },
+    {
+      "port": "escalate",
+      "subject": "soul.consciousness.inbox"
+    },
+    {
+      "port": "noop",
+      "subject": "soul.plan.noop"
+    }
+  ],
+  "mcp_permissions": {
+    "tickets": [],
+    "soul": [
+      "create_plan",
+      "update_idea",
+      "ask_user",
+      "publish_signal",
+      "journal_reflect"
+    ],
+    "management": ["get_system_status", "list_hub_agents"]
+  },
+  "allowedTools": ["file_read"],
+  "obsidian_mount": true,
+  "icon": "📐",
+  "shards": [
+    "architecture"
+  ]
+}
