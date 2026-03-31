@@ -48,6 +48,19 @@ User → chat-agent → consciousness → conscience (approve/reject) → strate
 
 Dispatcher discovers available agents dynamically via `list_agents`. It does not have hardcoded knowledge of who exists.
 
+## Workspace & Storage
+
+- **Ephemeral `/workspace/`**: Every agent container has its own `/workspace/`. It is **ephemeral** — destroyed when the container restarts. NEVER assume files written here survive.
+- **Persistent `/data/`**: Shared volume mounted from the host. Files here survive restarts. Only available to the control plane and deterministic agents by default.
+- **Persistent workspace for developers**: When a developer agent needs to produce code that persists:
+  1. Foreman requests a persistent directory via `create_workspace` (deterministic operation — creates `/data/workspaces/{name}/`)
+  2. The directory is mounted into the developer agent's container at `/workspace/repo`
+  3. The developer writes code to `/workspace/repo` — it persists on the host
+  4. No git push needed for persistence — the directory IS the persistent storage
+- **Who can create directories**: Only deterministic agents or the control plane. LLM agents request workspace creation, they don't create directories themselves.
+- **Who can write**: Any agent with the directory mounted can read/write files in it.
+- **Git repos**: For code that needs version control, initialize a git repo inside the persistent workspace. Push to external (GitHub) is optional and requires user-provided credentials.
+
 ## Key Rules
 
 1. Every input must produce an output (publish_signal).
